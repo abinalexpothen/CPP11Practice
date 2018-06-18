@@ -32,5 +32,5 @@ int user(X var,X* ptr)
 {
 	int x = var.mf(7);	// access using dot
 	int y = ptr->mf(9);	// access using arrow
-	int z = var.m;	// error: cannot access private member
+	//int z = var.m;	// error: cannot access private member
 }
