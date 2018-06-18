@@ -12,7 +12,10 @@ class X{
 private:		// implementation is private
 	int m;
 public:			// user interface is public
-	X(int i=0):m{i}{}	// a constructor (initialize data member m)
+	X(int i=0) : m(i)	// a constructor (initialize data member m)
+	{
+
+	}	
 
 	int mf(int i)		// a member function
 	{
@@ -23,7 +26,7 @@ public:			// user interface is public
 
 };
 
-X var{7};	// a variable of type X, initialized with 7
+X var(7);	// a variable of type X, initialized with 7
 
 int user(X var,X* ptr)
 {
