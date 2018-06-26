@@ -45,3 +45,23 @@ void Date::add_day(int n)
 {
 	d = d+n;
 }
+
+// Reg. DEFAULT COPYING
+// by default, the class objects can be copied
+Date d1 = my_birthday;	// init by copy
+Date d2{my_birthday};	// init by copy
+// by default, the copy of a class object is a copy of each member
+// a class object can by default be copied by assignment
+void f(Date& d)
+{
+	d = my_birthday;	// again, default semantics is memberwise copy ... 
+	//we can define an appropriate assignment operator is that is not the 
+	//right choice.
+}
+
+// Reg. ACCESS CONTROL
+class DateClass{
+	int d,m,y;
+public:
+	void init(int dd)
+}
