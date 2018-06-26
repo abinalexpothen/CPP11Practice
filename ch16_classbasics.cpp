@@ -28,9 +28,16 @@ public:			// user interface is public
 
 X var(7);	// a variable of type X, initialized with 7
 
+
 int user(X var,X* ptr)
 {
 	int x = var.mf(7);	// access using dot
 	int y = ptr->mf(9);	// access using arrow
 	//int z = var.m;	// error: cannot access private member
+	return 0;
+}
+
+int main()
+{
+	return 0;
 }
