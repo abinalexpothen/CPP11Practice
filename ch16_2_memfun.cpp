@@ -63,5 +63,18 @@ void f(Date& d)
 class DateClass{
 	int d,m,y;
 public:
-	void init(int dd)
+	void init(int dd, int mm, int yy);	// initialize
+	void add_year(int n);	// add n years
+	void add_month(int n);	// add n months
+	void add_day(int n);	// add n days
+};
+// A struct is a class whose members are public by default
+void DateClass::add_year(int n)
+{
+	y += n;
+}
+// Nonmember functions are barred from using private members of a class
+void timewarp(Date& d)
+{
+	d.y -= 200;	// error: Date::y is private
 }
