@@ -115,15 +115,47 @@ void DateClass::add_year(int n)
 // Nonmember functions are barred from using private members of a class
 void timewarp(DateClass& d)
 {
-	Date dx;
-	dx.m = 3;
+	DateClass dx;
+	// dx.m = 3; // error: m implicitly declared private.
 	dx.init(25,3,2011); // all these manipulations happen inside a function
 	//d.y -= 200;	// error: Date::y is private
 }
 // for this reason, init function is important!
-// How is it useful?
+// How is class useful?
 // 1. Helps in localizing errors while debugging
 // 2. If we change the representation of a class, we just need to change the member functions
 // 3. Only the member functions need to be learned to understand a class
 // 4. Low debugging time
 // 5. Protects private data.
+
+// diving deep into class and struct
+// Class definition -- class X{ ... }; A class definition is often referred to as a class declaration.
+// a class definition can be replicated in different source files using #include without violating
+// one-definition rule. struct is a class in which all members are public by default.
+class Date1 {
+	int d, m, y;	// private by default
+public:
+	Date1(int dd, int mm, int yy);
+	void add_year(int n);	// add n years
+};
+
+// we could also use the access specifier "private:" in a struct
+struct Date2 {
+private:
+	int d, m, y;
+public:
+	Date2(int dd, int mm, int yy);
+	void add_year(int n);	// add n years
+};
+// Date1 and Date2 are equivalent.
+// it is not a requirement to declare data first in a class. It makes sense to use data
+// data members last to emphasize the functions providing the public user interface.
+class Date3 {
+public:
+	Date3(int dd, int mm, int yy);
+	void add_year(int n);	// add n years
+private:
+	int d, m, y;
+};
+// In real code with public interface and implementation details are extensive, use 
+// Date3 type of definition.
