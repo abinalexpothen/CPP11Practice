@@ -1,13 +1,13 @@
-// 16.2 Class basics - introduces basic facilities for defining class and its members
-// Class is a user-defined type. Contains data members + member functions
-// member functions define the meaning of initialization, copy, move and cleanup.
-// data members are accessed using . for objects and -> for pointers
-// +, !, [] operators can be defined for a class
-// class is a namespace containing its members
+// 16.2 Class basics - introduces basic facilities for defining class
+// and its members Class is a user-defined type. Contains data members +
+// member functions member functions define the meaning of
+// initialization, copy, move and cleanup. data members are accessed
+// using . for objects and -> for pointers +, !, [] operators can be
+// defined for a class class is a namespace containing its members
 // public mem - class interface; private mem - implementation details
 // struct is a public class
 
-// Example: 
+// Example:
 class X{
 private:		// implementation is private
 	int m;
@@ -73,7 +73,8 @@ int main()
 
 void Date::init(int dd, int mm, int yy) // member function definition 
 {
-	d = dd; // note that we need not reference the variable d to a specific
+	d = dd; 
+	// note that we need not reference the variable d to a specific
 	//object in the member function definition.     
 	m = mm;
 	y = yy; 
@@ -89,11 +90,12 @@ void Date::add_day(int n)
 // by default, the class objects can be copied
 Date d1 = my_birthday;	// init by copy
 Date d2{my_birthday};	// init by copy
-// by default, the copy of a class object is a copy of each member
-// a class object can by default be copied by assignment
+// by default, the copy of a class object is a copy of each member a
+// class object can by default be copied by assignment
 void f(Date& d)
 {
-	d = my_birthday;	// again, default semantics is memberwise copy ... 
+	d = my_birthday;	
+	// again, default semantics is memberwise copy ...
 	//we can define an appropriate assignment operator is that is not the 
 	//right choice.
 }
@@ -112,26 +114,31 @@ void DateClass::add_year(int n)
 {
 	y += n;
 }
+void DateClass::init(int dd, int mm, int yy)
+{
+	d = dd;
+	m = mm;
+	y = yy;
+}
 // Nonmember functions are barred from using private members of a class
 void timewarp(DateClass& d)
 {
 	DateClass dx;
 	// dx.m = 3; // error: m implicitly declared private.
-	dx.init(25,3,2011); // all these manipulations happen inside a function
+	dx.init(25,3,2011); 
+	// all these manipulations happen inside a function
 	//d.y -= 200;	// error: Date::y is private
 }
-// for this reason, init function is important!
-// How is class useful?
-// 1. Helps in localizing errors while debugging
-// 2. If we change the representation of a class, we just need to change the member functions
-// 3. Only the member functions need to be learned to understand a class
-// 4. Low debugging time
-// 5. Protects private data.
-
-// diving deep into class and struct
-// Class definition -- class X{ ... }; A class definition is often referred to as a class declaration.
-// a class definition can be replicated in different source files using #include without violating
-// one-definition rule. struct is a class in which all members are public by default.
+// for this reason, init function is important! How is class useful?
+// 1. Helps in localizing errors while debugging 2. If we change the
+// representation of a class, we just need to change the member
+// functions 3. Only the member functions need to be learned to
+// understand a class 4. Low debugging time 5. Protects private data.
+// DIVING DEEP into class and struct Class definition -- class X{ ...
+// }; A class definition is often referred to as a class declaration.
+// a class definition can be replicated in different source files
+// using #include without violating one-definition rule. struct is a
+// class in which all members are public by default.
 class Date1 {
 	int d, m, y;	// private by default
 public:
@@ -147,9 +154,9 @@ public:
 	Date2(int dd, int mm, int yy);
 	void add_year(int n);	// add n years
 };
-// Date1 and Date2 are equivalent.
-// it is not a requirement to declare data first in a class. It makes sense to use data
-// data members last to emphasize the functions providing the public user interface.
+// Date1 and Date2 are equivalent. it is not a requirement to declare
+// data first in a class. It makes sense to use data data members last
+// to emphasize the functions providing the public user interface.
 class Date3 {
 public:
 	Date3(int dd, int mm, int yy);
@@ -157,5 +164,39 @@ public:
 private:
 	int d, m, y;
 };
-// In real code with public interface and implementation details are extensive, use 
-// Date3 type of definition.
+// In real code with public interface and implementation details are
+// extensive, use  Date3 type of definition. access specifiers could
+// be used multiple times in a single class declaration. But, this tend
+// to be messy and affect the object layout. Allowing many access
+// specifiers in a class is  useful for machine generated code.
+class Date4 {
+public:
+	Date4(int dd, int mm, int yy);
+private:
+	int d, m, y;
+public:
+	void add_year(int n);	// add n years
+};
+// Constructors - explicit purpose is to initialize objects. As it
+// constructs values of a given type, they are called constructors.
+// They have the same name as the class; Example: 
+class DateConstructorDemo {
+	int d, m, y;
+public:
+	DateConstructorDemo(int dd, int mm, int yy);	// constructor
+	// ...
+};
+// arguments of a constructor must be supplied.
+void constructordemo()
+{
+	DateConstructorDemo today = DateConstructorDemo(23,6,1983);
+	DateConstructorDemo xmas(25,12,1990);	// abbreviated form
+	// DateConstructorDemo my_birthday;	// error: no matching constructor
+	// DateConstructorDemo release1_0(10,12); // error: no matching constructor
+}
+DateConstructorDemo::DateConstructorDemo(int dd, int mm, int yy)
+{
+	d = dd;
+	m = mm;
+	y = yy;
+}
