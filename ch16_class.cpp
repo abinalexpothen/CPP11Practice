@@ -193,10 +193,58 @@ void constructordemo()
 	DateConstructorDemo xmas(25,12,1990);	// abbreviated form
 	// DateConstructorDemo my_birthday;	// error: no matching constructor
 	// DateConstructorDemo release1_0(10,12); // error: no matching constructor
+	// since a constructor defines initialization for a class, we could use {}-
+	// initialization notation.
+	DateConstructorDemo tomorrow = DateConstructorDemo{24,6,1983};
+	DateConstructorDemo bday{25,12,1990};	// abbreviated form
+	// Note: {}-form is recommended.
 }
 DateConstructorDemo::DateConstructorDemo(int dd, int mm, int yy)
 {
 	d = dd;
 	m = mm;
 	y = yy;
+}
+
+// CONSTRUCTOR OVERLOADING
+class Organism
+{
+	int h, b, l;
+public:
+	Organism(int hh, int bb, int ll)	// head, body, leg
+	{
+		h = hh;
+		b = bb;
+		l = ll;
+	}	
+	Organism(int hh, int ll)	// head, leg
+	{
+		h = hh;
+		l = ll;
+	}
+	Organism(int ll)	// leg
+	{
+		l = ll;
+	}
+	Organism()	// default numbers
+	{
+		h = 1;
+		b = 1;
+		l = 2;
+	}
+	Organism(const char*);	// date in human in string representation
+};
+
+Organism::Organism(const char* ptr)
+{
+	
+}
+
+void cnstrctroverld()
+{
+	Organism cow{1,1,4};
+	Organism alien{"Has a complex body"};
+	Organism weirdanimal{1,1};
+	Organism human;
+	Organism chimp{};
 }
