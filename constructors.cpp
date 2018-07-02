@@ -105,6 +105,8 @@ Date1::Date1(int dd, int mm, int yy)
 	y = yy;
 }
 
+// Constructors helps to minimize the risk of uninitialized data
+
 int main()
 {
 	return 0;
