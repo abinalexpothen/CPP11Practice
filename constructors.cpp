@@ -107,6 +107,14 @@ Date1::Date1(int dd, int mm, int yy)
 
 // Constructors helps to minimize the risk of uninitialized data
 
+// explicit constructors
+void my_fct(Organism d);
+
+void f()
+{
+	Organism d {15};	// plausible: x becomes {15,}
+}
+
 int main()
 {
 	return 0;
